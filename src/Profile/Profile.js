@@ -12,6 +12,9 @@ export default class Profile extends Component {
           1000
         );
       }
+      componentWillUnmount() {
+        clearInterval(this.timerID);
+      }
       tick() {
         this.setState({
           date: new Date()
