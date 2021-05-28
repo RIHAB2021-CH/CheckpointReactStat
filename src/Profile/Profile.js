@@ -2,24 +2,17 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card';
 export default class Profile extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {date: new Date()};
-      }
-      componentDidMount() {
-        this.timerID = setInterval(
-          () => this.tick(),
-          1000
-        );
-      }
-      componentWillUnmount() {
-        clearInterval(this.timerID);
-      }
-      tick() {
-        this.setState({
-          date: new Date()
-        });
-      }
+  state={seconds: 1}
+   
+       componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState({ seconds: this.state.seconds + 1 });
+    }, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+     
     render() {
         return (
               <div>
@@ -31,7 +24,7 @@ export default class Profile extends Component {
                 <Card.Text>
                 {this.props.Person.bio}
                 </Card.Text>
-                <Card.Footer className="text-muted">{this.state.date.toLocaleTimeString()}</Card.Footer>
+                <Card.Footer className="text-muted">{this.state.seconds} Secondes since the last component was mounted</Card.Footer>
                
               </Card.Body>
             </Card>
